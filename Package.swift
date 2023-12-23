@@ -5,17 +5,17 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "macro-kit",
+    name: "VaporMacro",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "macro-kit",
-            targets: ["macro-kit"]
+            name: "VaporMacro",
+            targets: ["VaporMacro"]
         ),
         .executable(
-            name: "macro-kitClient",
-            targets: ["macro-kitClient"]
+            name: "VaporMacroClient",
+            targets: ["VaporMacroClient"]
         ),
     ],
     dependencies: [
@@ -27,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         // Macro implementation that performs the source transformation of a macro.
         .macro(
-            name: "macro-kitMacros",
+            name: "MacroKit",
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
@@ -35,16 +35,16 @@ let package = Package(
         ),
 
         // Library that exposes a macro as part of its API, which is used in client programs.
-        .target(name: "macro-kit", dependencies: ["macro-kitMacros"]),
+        .target(name: "VaporMacro", dependencies: ["MacroKit"]),
 
         // A client of the library, which is able to use the macro in its own code.
-        .executableTarget(name: "macro-kitClient", dependencies: ["macro-kit"]),
+        .executableTarget(name: "VaporMacroClient", dependencies: ["VaporMacro"]),
 
         // A test target used to develop the macro implementation.
         .testTarget(
-            name: "macro-kitTests",
+            name: "MacroKitTests",
             dependencies: [
-                "macro-kitMacros",
+                "MacroKit",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
             ]
         ),

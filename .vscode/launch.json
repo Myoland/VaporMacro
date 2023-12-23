@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug VaporMacroClient",
+            "program": "${workspaceFolder:VaporMacro}/.build/debug/VaporMacroClient",
+            "args": [],
+            "cwd": "${workspaceFolder:VaporMacro}",
+            "preLaunchTask": "swift: Build Debug VaporMacroClient"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release VaporMacroClient",
+            "program": "${workspaceFolder:VaporMacro}/.build/release/VaporMacroClient",
+            "args": [],
+            "cwd": "${workspaceFolder:VaporMacro}",
+            "preLaunchTask": "swift: Build Release VaporMacroClient"
+        }
+    ]
+}
